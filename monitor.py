@@ -33,6 +33,8 @@ class cdn(threading.Thread):
             m2 = hashlib.md5()
             m2.update(q.content)
             md5 = m2.hexdigest()
+            if q.status_code != 200:
+                send.cSend(self.gid)
         except:
             print "ERROR"
             send.cSend(self.gid)
