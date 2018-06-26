@@ -19,7 +19,7 @@ def cSend(gid):
     from_addr = "18910158363@163.com"
     password = "aa11bb22"
     smtp_server = "smtp.163.com"
-    content =  '系统故障:链接直播地址:%s失败'%(gid)
+    content =  '系统故障:链接直播地址失败:%s'%(gid)
 
     msg = MIMEText(content, 'plain', 'utf-8')
     msg['From'] = _format_addr(u'SLP系统<%s>' % from_addr)
@@ -35,7 +35,7 @@ def mSend(gid):
     from_addr = "18910158363@163.com"
     password = "aa11bb22"
     smtp_server = "smtp.163.com"
-    content =  '系统故障:链接直播地址:%s失败'%(gid)
+    content =  '系统故障:直播源未更新:%s'%(gid)
 
     msg = MIMEText(content, 'plain', 'utf-8')
     msg['From'] = _format_addr(u'SLP系统<%s>' % from_addr)
