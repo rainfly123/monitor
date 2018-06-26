@@ -11,6 +11,7 @@ import aes
 import threading
 import daemon
 import hashlib
+import send
 
 URL = "http://new.southtv.cn:9180"
 gids = {"cctv1":"", "cctv3":"", "cctv6":"", "cctv13":"", "cctv8":"", "cctv5":"", "cctv5p":"", "zjws":"", "bjws":"", "jsws":"", "gdws":"", "gdty":"", "gdxw":"", "gdgg":"", "tvs2":"", "zjpd":""}
@@ -34,13 +35,15 @@ class cdn(threading.Thread):
             md5 = m2.hexdigest()
         except:
             print "ERROR"
+            send.cSend(self.gid)
         if gids[self.gid] == md5:
             print "ERROR"
+            send.mSend(self.gid)
         else:
             gids[self.gid] = md5
 
 if __name__ == "__main__":
-    #daemon.daemonize("/tmp/cdn.pid")
+    daemon.daemonize("/tmp/cdn.pid")
     os.chdir("/data")
 
     while True:
