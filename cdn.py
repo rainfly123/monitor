@@ -17,6 +17,7 @@ import StringIO
 
 URL = "http://new.southtv.cn:9180"
 gids = {"cctv1":"", "cctv3":"", "cctv6":"", "cctv13":"", "cctv8":"", "cctv5":"", "cctv5p":"", "zjws":"", "bjws":"", "jsws":"", "gdws":"", "gdty":"", "gdxw":"", "gdgg":"", "tvs2":"", "zjpd":""}
+SLIPS = 6
 
 class cdn(threading.Thread):
 
@@ -49,8 +50,9 @@ class cdn(threading.Thread):
                 l = l.strip()
                 if l.find("http") >= 0:
                     i += 1
-                    if i <= 6:
+                    if i <= SLIPS:
                         continue
+                    print l
                     q = requests.get(l, headers={"User-Agent":"ijkplayer"})
                     q.connection.close()
         
@@ -62,5 +64,5 @@ if __name__ == "__main__":
         for gid in gids.keys():
             t = cdn(gid)
             t.start()
-        time.sleep(15)
+        time.sleep(9)
 
