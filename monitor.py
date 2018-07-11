@@ -37,22 +37,23 @@ class cdn(threading.Thread):
             if q.status_code != 200:
                 print "Server Reply ERROR"
                 cgids[self.gid] += 1
-                if cgids[self.gid] % 3 == 0:
+                if cgids[self.gid] % 4 == 0:
                     send.cSend(self.gid)
                 return
         except:
             print "Connect ERROR"
             cgids[self.gid] += 1
-            if cgids[self.gid] % 3 == 0:
+            if cgids[self.gid] % 4 == 0:
                 send.cSend(self.gid)
             return
         if gids[self.gid] == md5:
             print "Md5 ERROR"
             cgids[self.gid] += 1
-            if cgids[self.gid] % 3 == 0:
+            if cgids[self.gid] % 4 == 0:
                 send.mSend(self.gid)
         else:
             gids[self.gid] = md5
+            cgids[self.gid] = 0
 
 if __name__ == "__main__":
     daemon.daemonize("/tmp/cdn.pid")
@@ -62,5 +63,5 @@ if __name__ == "__main__":
         for gid in gids.keys():
             t = cdn(gid)
             t.start()
-        time.sleep(15)
+        time.sleep(25)
 
