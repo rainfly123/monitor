@@ -53,7 +53,7 @@ class cdn(threading.Thread):
                 send.mSend(self.gid)
         else:
             gids[self.gid] = md5
-            if cgids[self.gid] > 0:
+            if cgids[self.gid] > 3:
                 cgids[self.gid] = 0
                 send.okSend(self.gid)
 
