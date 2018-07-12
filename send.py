@@ -47,8 +47,23 @@ def mSend(gid):
     server.sendmail(from_addr, to_addr, msg.as_string())
     server.quit()
 
+def okSend(gid):
+    from_addr = "18910158363@163.com"
+    password = "aa11bb22"
+    smtp_server = "smtp.163.com"
+    content =  '故障已恢复:直播:%s'%(gid)
 
+    msg = MIMEText(content, 'plain', 'utf-8')
+    msg['From'] = _format_addr(u'SLP系统<%s>' % from_addr)
+    msg['To'] = _format_addr(u'管理员 <%s>' % to_addr)
+    msg['Subject'] = Header(u'系统故障已经恢复', 'utf-8').encode()
+    server = smtplib.SMTP(smtp_server, 25)
+    #server.set_debuglevel(1)
+    server.login(from_addr, password)
+    server.sendmail(from_addr, to_addr, msg.as_string())
+    server.quit()
 
 if __name__ == "__main__":
     cSend("cctv8")
     mSend("cctv8")
+    okSend("test")

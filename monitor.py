@@ -53,7 +53,9 @@ class cdn(threading.Thread):
                 send.mSend(self.gid)
         else:
             gids[self.gid] = md5
-            cgids[self.gid] = 0
+            if cgids[self.gid] > 0:
+                cgids[self.gid] = 0
+                send.okSend(self.gid)
 
 if __name__ == "__main__":
     daemon.daemonize("/tmp/cdn.pid")
